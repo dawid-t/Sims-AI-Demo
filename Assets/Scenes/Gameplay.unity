@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   usableTime: 10
-  delayedUsableTime: 0
+  delayedUsableTime: 6
   hungerChanger: -3
   entertainmentChanger: 0
   hygieneChanger: -1
@@ -7268,6 +7268,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c66752f50f08f6646bb7a43dcbf46891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxStatisticValue: 10
+  startStatisticValue: 5
+  statisticsDecreaseTime: 30
+  hunger: 0
+  entertainment: 0
+  hygiene: 0
+  bladder: 0
+  energy: 0
 --- !u!1 &1612056694538344647
 GameObject:
   m_ObjectHideFlags: 0

@@ -49,16 +49,86 @@ public class UsableObject : MonoBehaviour
 		// You can override the method and add other animations of other objects:
 		PlayOtherAnimations();
 
-		// Change the player properties over time:
+		// Change the player statistics over time:
 		yield return new WaitForSeconds(delayedUsableTime);
+
+		PlayerStatistics playerStatistics = player.GetComponent<PlayerStatistics>();
+		int hungerChangeTime = (hungerChanger != 0) ? usableTime / hungerChanger : 0;
+		int entertainmentChangeTime = (entertainmentChanger != 0) ? usableTime / entertainmentChanger : 0;
+		int hygieneChangeTime = (hygieneChanger != 0) ? usableTime / hygieneChanger : 0;
+		int bladderChangeTime = (bladderChanger != 0) ? usableTime / bladderChanger : 0;
+		int energyChangeTime = (energyChanger != 0) ? usableTime / energyChanger : 0;
+
 		int currentUsableTime = 0;
 		while(currentUsableTime < usableTime)
 		{
 			yield return new WaitForSeconds(1);
-
-			// update player properties and UI
-
 			currentUsableTime++;
+
+			#region Change the player statistics:
+			if(hungerChangeTime != 0 && currentUsableTime % hungerChangeTime == 0)
+			{
+				if(hungerChanger > 0)
+				{
+					playerStatistics.IncreaseStatistic(PlayerStatistics.Statistic.Hunger);
+				}
+				else if(hungerChanger < 0)
+				{
+					playerStatistics.DecreaseStatistic(PlayerStatistics.Statistic.Hunger);
+				}
+			}
+
+			if(entertainmentChangeTime != 0 && currentUsableTime % entertainmentChangeTime == 0)
+			{
+				if(entertainmentChanger > 0)
+				{
+					playerStatistics.IncreaseStatistic(PlayerStatistics.Statistic.Entertainment);
+				}
+				else if(entertainmentChanger < 0)
+				{
+					playerStatistics.DecreaseStatistic(PlayerStatistics.Statistic.Entertainment);
+				}
+			}
+
+			if(hygieneChangeTime != 0 && currentUsableTime % hygieneChangeTime == 0)
+			{
+				if(hygieneChanger > 0)
+				{
+					playerStatistics.IncreaseStatistic(PlayerStatistics.Statistic.Hygiene);
+				}
+				else if(hygieneChanger < 0)
+				{
+					playerStatistics.DecreaseStatistic(PlayerStatistics.Statistic.Hygiene);
+				}
+			}
+
+			if(bladderChangeTime != 0 && currentUsableTime % bladderChangeTime == 0)
+			{
+				if(bladderChanger > 0)
+				{
+					playerStatistics.IncreaseStatistic(PlayerStatistics.Statistic.Bladder);
+				}
+				else if(bladderChanger < 0)
+				{
+					playerStatistics.DecreaseStatistic(PlayerStatistics.Statistic.Bladder);
+				}
+			}
+
+			if(energyChangeTime != 0 && currentUsableTime % energyChangeTime == 0)
+			{
+				if(energyChanger > 0)
+				{
+					playerStatistics.IncreaseStatistic(PlayerStatistics.Statistic.Energy);
+				}
+				else if(energyChanger < 0)
+				{
+					playerStatistics.DecreaseStatistic(PlayerStatistics.Statistic.Energy);
+				}
+			}
+			#endregion Change the player statistics.
+
+			#region Change the UI of player statistics:
+			#endregion Change the UI of player statistics.
 		}
 
 		// End using the object:

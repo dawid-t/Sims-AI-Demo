@@ -14,6 +14,7 @@ public class PlayerStatistics : MonoBehaviour
 	public int hunger, entertainment, hygiene, bladder, energy;
 
 
+	public int MaxStatisticValue => maxStatisticValue;
 	public int Hunger => hunger;
 	public int Entertainment => entertainment;
 	public int Hygiene => hygiene;
@@ -41,6 +42,13 @@ public class PlayerStatistics : MonoBehaviour
 		hygiene = startStatisticValue;
 		bladder = startStatisticValue;
 		energy = startStatisticValue;
+
+		StatisticsUI statisticsUI = StatisticsUI.Instance;
+		statisticsUI.ChangeHungerUI(hunger, maxStatisticValue);
+		statisticsUI.ChangeEntertainmentUI(entertainment, maxStatisticValue);
+		statisticsUI.ChangeHygieneUI(hygiene, maxStatisticValue);
+		statisticsUI.ChangeBladderUI(bladder, maxStatisticValue);
+		statisticsUI.ChangeEnergyUI(energy, maxStatisticValue);
 	}
 
 	private void CheckStartStatisticValue()

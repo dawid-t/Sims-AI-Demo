@@ -6,15 +6,12 @@ using UnityEngine.EventSystems;
 
 public class PlayerInteraction : MonoBehaviour
 {
-	private bool isPlayerUsingObject = false;
 	private Camera mainCamera;
 	private Animator animator;
 	private NavMeshAgent navMeshAgent;
-	private Coroutine stopWalkAnimationCoroutine;
-	private UsableObject lastUsableObject;
-
-
-	public bool IsPlayerUsingObject { get => isPlayerUsingObject; set => isPlayerUsingObject = value; }
+	private Coroutine walkToClickedPointCoroutine, stopWalkAnimationCoroutine;
+	[SerializeField]
+	protected Sprite walkInteractionIcon;
 
 
 	private void Start()
@@ -26,10 +23,10 @@ public class PlayerInteraction : MonoBehaviour
 
 	private void Update()
 	{
-		/*if(EventSystem.current.IsPointerOverGameObject()) // If pointer is over the UI then don't do anything.
+		if(EventSystem.current.IsPointerOverGameObject()) // If pointer is over the UI then don't do anything.
 		{
 			return;
-		}*/
+		}
 
 		CheckHoveredObjectAndInteract(); // Do something if hovered object is interactable.
 	}
@@ -41,52 +38,74 @@ public class PlayerInteraction : MonoBehaviour
 
 		if(Physics.Raycast(ray, out hit))
 		{
+			InteractionsUI interactionsUI = InteractionsUI.Instance;
 			GameObject hoveredGameObject = hit.transform.gameObject;
 
-			if(!isPlayerUsingObject)
+			if(hoveredGameObject.CompareTag("WalkableGround"))
 			{
-				if(hoveredGameObject.CompareTag("WalkableGround"))
+				if(Input.GetMouseButtonUp(0))
 				{
-					if(Input.GetMouseButtonUp(0))
+					interactionsUI.AddInteraction(() =>
 					{
-						WalkToClickedPoint(hit.point);
-					}
-				}
-				else if(hoveredGameObject.CompareTag("UsableObject") || hoveredGameObject.CompareTag("Player"))
-				{
-					lastUsableObject = hoveredGameObject.GetComponent<UsableObject>();
-					ShowInteractionInfo(lastUsableObject);
-					if(Input.GetMouseButtonUp(0))
+						if(walkToClickedPointCoroutine != null)
+						{
+							StopCoroutine(walkToClickedPointCoroutine);
+							StopWalkAnimationCoroutine();
+						}
+						walkToClickedPointCoroutine = StartCoroutine(WalkToClickedPoint(hit.point, true));
+					},
+					(interactionButtonIndex) =>
 					{
-						WalkToClickedPoint(lastUsableObject.StartUsingObjectPosition.position);
-						DoInteraction(lastUsableObject);
-					}
+						StopInteraction(null, interactionButtonIndex);
+					},
+					walkInteractionIcon, gameObject);
 				}
 			}
-			else if(Input.GetMouseButtonUp(0))
+			else if(hoveredGameObject.CompareTag("UsableObject"))// || hoveredGameObject.CompareTag("Player"))
 			{
-				StopInteraction(lastUsableObject); // TEraz sie nadpisuje a ma dodawac sie do kolejki!
+				UsableObject lastUsableObject = hoveredGameObject.GetComponent<UsableObject>();
+				ShowInteractionInfo(lastUsableObject);
+				if(Input.GetMouseButtonUp(0))
+				{
+					interactionsUI.AddInteraction(() =>
+					{
+						if(walkToClickedPointCoroutine != null)
+						{
+							StopCoroutine(walkToClickedPointCoroutine);
+							StopWalkAnimationCoroutine();
+						}
+						walkToClickedPointCoroutine = StartCoroutine(WalkToClickedPoint(lastUsableObject.StartUsingObjectPosition.position, false));
+						StartInteraction(lastUsableObject);
+					},
+					(interactionButtonIndex) =>
+					{
+						StopInteraction(lastUsableObject, interactionButtonIndex);
+					},
+					lastUsableObject.InteractionButtonIcon, gameObject);
+				}
 			}
 		}
 	}
 
-	private void WalkToClickedPoint(Vector3 clickedPoint)
+	private IEnumerator WalkToClickedPoint(Vector3 clickedPoint, bool isFreeWalk)
 	{
+		while(!navMeshAgent.enabled)
+		{
+			yield return null;
+		}
+
 		navMeshAgent.destination = clickedPoint;
-		if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Walk") || animator.GetNextAnimatorStateInfo(0).IsName("Idle0"))
+		if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Walk") || animator.GetNextAnimatorStateInfo(0).IsTag("Idle"))
 		{
 			animator.SetTrigger("Walk");
 		}
 
-		if(stopWalkAnimationCoroutine != null)
-		{
-			StopCoroutine(stopWalkAnimationCoroutine);
-			stopWalkAnimationCoroutine = null;
-		}
-		stopWalkAnimationCoroutine = StartCoroutine(StopWalkAnimation());
+		walkToClickedPointCoroutine = null;
+		StopWalkAnimationCoroutine();
+		stopWalkAnimationCoroutine = StartCoroutine(StopWalkAnimation(isFreeWalk));
 	}
 
-	private IEnumerator StopWalkAnimation()
+	private IEnumerator StopWalkAnimation(bool isFreeWalk)
 	{
 		yield return null; // Need to wait 1 frame to update the "navMeshAgent.remainingDistance" value.
 		while(navMeshAgent.enabled && navMeshAgent.remainingDistance > 0.5f)
@@ -96,6 +115,21 @@ public class PlayerInteraction : MonoBehaviour
 
 		animator.SetTrigger("Idle");
 		stopWalkAnimationCoroutine = null;
+
+		if(isFreeWalk)
+		{
+			yield return null; // Need to wait 1 frame to update the next animator state info.
+			InteractionsUI.Instance.StartInteraction();
+		}
+	}
+
+	private void StopWalkAnimationCoroutine()
+	{
+		if(stopWalkAnimationCoroutine != null)
+		{
+			StopCoroutine(stopWalkAnimationCoroutine);
+			stopWalkAnimationCoroutine = null;
+		}
 	}
 
 	private void ShowInteractionInfo(UsableObject usableObject)
@@ -103,13 +137,19 @@ public class PlayerInteraction : MonoBehaviour
 		//show usableObject.ObjectInteractionInfo
 	}
 
-	private void DoInteraction(UsableObject usableObject)
+	private void StartInteraction(UsableObject usableObject)
 	{
 		usableObject.StartUsingObject(gameObject);
 	}
 
-	private void StopInteraction(UsableObject usableObject)
+	private void StopInteraction(UsableObject usableObject, int interactionButtonIndex)
 	{
 		usableObject?.StopUsingObject(gameObject);
+
+		// Stop the walking player:
+		if(navMeshAgent.enabled && interactionButtonIndex == 0)
+		{
+			navMeshAgent.destination = transform.position;
+		}
 	}
 }

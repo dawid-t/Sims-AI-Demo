@@ -14,12 +14,15 @@ public class UsableObject : MonoBehaviour
 	protected int startPlayerAnimationRotation;
 	[SerializeField]
 	protected Transform startUsingObjectPosition;
+	[SerializeField]
+	protected Sprite interactionButtonIcon;
 	protected Animator animator;
 	protected Coroutine usingObjectCoroutine;
 
 
 	public string ObjectInteractionInfo => objectInteractionInfo;
 	public Transform StartUsingObjectPosition => startUsingObjectPosition;
+	public Sprite InteractionButtonIcon => interactionButtonIcon;
 
 
 	private void Start()
@@ -161,7 +164,7 @@ public class UsableObject : MonoBehaviour
 
 		if(!startUsingObject)
 		{
-			while(!playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle0"))
+			while(!playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Idle"))
 			{
 				yield return null; // Wait for the Idle animation.
 			}
@@ -175,7 +178,11 @@ public class UsableObject : MonoBehaviour
 			player.transform.rotation = Quaternion.Euler(0, startPlayerAnimationRotation, 0);
 		}
 
-		player.GetComponent<PlayerInteraction>().IsPlayerUsingObject = startUsingObject;
+		if(!startUsingObject)
+		{
+			yield return null;
+			InteractionsUI.Instance.StartInteraction();
+		}
 	}
 
 	protected virtual void PlayOtherAnimations()

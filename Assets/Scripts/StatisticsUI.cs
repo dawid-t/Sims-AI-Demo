@@ -26,35 +26,35 @@ public class StatisticsUI : MonoBehaviour
 	{
 		float normalizedPercents = GetNormalizedPercents(statisticValue, maxStatisticValue);
 		ChangePercents(normalizedPercents, hungerPercentsText);
-		ChangeBarColor(normalizedPercents, hungerBarImage);
+		ChangeBarLook(normalizedPercents, hungerBarImage);
 	}
 
 	public void ChangeEntertainmentUI(int statisticValue, int maxStatisticValue)
 	{
 		float normalizedPercents = GetNormalizedPercents(statisticValue, maxStatisticValue);
 		ChangePercents(normalizedPercents, entertainmentPercentsText);
-		ChangeBarColor(normalizedPercents, entertainmentBarImage);
+		ChangeBarLook(normalizedPercents, entertainmentBarImage);
 	}
 
 	public void ChangeHygieneUI(int statisticValue, int maxStatisticValue)
 	{
 		float normalizedPercents = GetNormalizedPercents(statisticValue, maxStatisticValue);
 		ChangePercents(normalizedPercents, hygienePercentsText);
-		ChangeBarColor(normalizedPercents, hygieneBarImage);
+		ChangeBarLook(normalizedPercents, hygieneBarImage);
 	}
 
 	public void ChangeBladderUI(int statisticValue, int maxStatisticValue)
 	{
 		float normalizedPercents = GetNormalizedPercents(statisticValue, maxStatisticValue);
 		ChangePercents(normalizedPercents, bladderPercentsText);
-		ChangeBarColor(normalizedPercents, bladderBarImage);
+		ChangeBarLook(normalizedPercents, bladderBarImage);
 	}
 
 	public void ChangeEnergyUI(int statisticValue, int maxStatisticValue)
 	{
 		float normalizedPercents = GetNormalizedPercents(statisticValue, maxStatisticValue);
 		ChangePercents(normalizedPercents, energyPercentsText);
-		ChangeBarColor(normalizedPercents, energyBarImage);
+		ChangeBarLook(normalizedPercents, energyBarImage);
 	}
 
 	private float GetNormalizedPercents(int statisticValue, int maxStatisticValue)
@@ -67,9 +67,13 @@ public class StatisticsUI : MonoBehaviour
 		statisticText.text = (normalizedPercents*100)+"%";
 	}
 
-	private void ChangeBarColor(float normalizedPercents, Image statisticbarImage)
+	private void ChangeBarLook(float normalizedPercents, Image statisticbarImage)
 	{
+		// Color:
 		float hsvColorPercent = normalizedPercents * 0.32f; // 0% (min) = red, 16% (mid) = yellow, 32% (max) = green.
 		statisticbarImage.color = Color.HSVToRGB(hsvColorPercent, 1, 1);
+
+		// Bar length:
+		statisticbarImage.fillAmount = normalizedPercents;
 	}
 }

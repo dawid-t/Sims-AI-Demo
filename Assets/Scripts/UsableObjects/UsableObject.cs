@@ -20,6 +20,8 @@ public class UsableObject : MonoBehaviour
 	protected Coroutine usingObjectCoroutine;
 
 
+	public int UsableTime => usableTime;
+	public int DelayedUsableTime => delayedUsableTime;
 	public string ObjectInteractionInfo => objectInteractionInfo;
 	public Transform StartUsingObjectPosition => startUsingObjectPosition;
 	public Sprite InteractionButtonIcon => interactionButtonIcon;
@@ -182,9 +184,6 @@ public class UsableObject : MonoBehaviour
 			yield return null;
 			InteractionsUI.Instance.StartInteraction();
 		}
-
-		Debug.Log("position: "+player.transform.position);
-		Debug.Log("rotation: "+player.transform.rotation.eulerAngles);
 	}
 
 	private void PlayUsableObjectAnimation(bool startUsingObject)

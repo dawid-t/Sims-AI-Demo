@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
@@ -16,6 +17,7 @@ public class PlayerInteraction : MonoBehaviour
 	[SerializeField]
 	private Sprite walkInteractionIcon;
 	private AudioSource audioSource;
+	private TextMeshPro lastUsableObjectInteractionInfo;
 
 
 	private void Start()
@@ -46,6 +48,7 @@ public class PlayerInteraction : MonoBehaviour
 
 			if(hoveredGameObject.CompareTag("WalkableGround"))
 			{
+				HideInteractionInfo();
 				if(Input.GetMouseButtonUp(0))
 				{
 					InteractionsUI.Instance.AddInteraction(() =>
@@ -72,6 +75,10 @@ public class PlayerInteraction : MonoBehaviour
 				{
 					AddInteraction(lastUsableObject);
 				}
+			}
+			else
+			{
+				HideInteractionInfo();
 			}
 		}
 	}
@@ -142,7 +149,18 @@ public class PlayerInteraction : MonoBehaviour
 
 	private void ShowInteractionInfo(UsableObject usableObject)
 	{
-		//show usableObject.ObjectInteractionInfo
+		HideInteractionInfo();
+		lastUsableObjectInteractionInfo = usableObject.ObjectInteractionInfo;
+		lastUsableObjectInteractionInfo.gameObject.SetActive(true);
+	}
+
+	private void HideInteractionInfo()
+	{
+		if(lastUsableObjectInteractionInfo != null)
+		{
+			lastUsableObjectInteractionInfo.gameObject.SetActive(false);
+			lastUsableObjectInteractionInfo = null;
+		}
 	}
 
 	private void StartInteraction(UsableObject usableObject)
@@ -220,24 +238,6 @@ public class PlayerInteraction : MonoBehaviour
 		for(int i = 0; i < usableObjectsDictionary.Count; i++)
 		{
 			AddInteraction(usableObjectsDictionary[keys[i]]);
-		}
-	}
-
-	private void PlayAnimationSound()
-	{
-		Debug.Log("StartBath: "+animator.GetCurrentAnimatorStateInfo(0).IsName("StartBath"));
-		Debug.Log("EndBath: "+animator.GetCurrentAnimatorStateInfo(0).IsName("EndBath"));
-
-		if(audioSource != null)
-		{
-			if(animator.GetCurrentAnimatorStateInfo(0).IsName("StartBath"))
-			{
-				audioSource.Play();
-			}
-			else
-			{
-				audioSource.Stop();
-			}
 		}
 	}
 }

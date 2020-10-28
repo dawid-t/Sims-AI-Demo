@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,11 +10,13 @@ public class UsableObject : MonoBehaviour
 	[SerializeField] [Range(-5, 5)]
 	private int hungerChanger, entertainmentChanger, hygieneChanger, bladderChanger, energyChanger;
 	[SerializeField]
-	private string objectInteractionInfo, startPlayerAnimationTriggerName, endPlayerAnimationTriggerName;
+	private string startPlayerAnimationTriggerName, endPlayerAnimationTriggerName;
 	[SerializeField]
 	private int startPlayerAnimationRotation;
 	[SerializeField]
 	private Transform startUsingObjectPosition;
+	[SerializeField]
+	private TextMeshPro objectInteractionInfo;
 	[SerializeField]
 	private Sprite interactionButtonIcon;
 	[SerializeField]
@@ -25,8 +28,8 @@ public class UsableObject : MonoBehaviour
 
 	public int UsableTime => usableTime;
 	public int DelayedUsableTime => delayedUsableTime;
-	public string ObjectInteractionInfo => objectInteractionInfo;
 	public Transform StartUsingObjectPosition => startUsingObjectPosition;
+	public TextMeshPro ObjectInteractionInfo => objectInteractionInfo;
 	public Sprite InteractionButtonIcon => interactionButtonIcon;
 
 

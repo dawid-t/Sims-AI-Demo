@@ -208,6 +208,7 @@ public class PlayerStatistics : MonoBehaviour
 
 		GetComponent<PlayerInteraction>().enabled = false;
 		InteractionsUI.Instance.CancelWaitingInteractions(playerAnimator);
+		yield return null;
 
 		GetComponent<NavMeshAgent>().enabled = false;
 		playerAnimator.applyRootMotion = true;

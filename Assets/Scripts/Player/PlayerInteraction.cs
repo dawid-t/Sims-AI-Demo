@@ -15,6 +15,7 @@ public class PlayerInteraction : MonoBehaviour
 	private UsableObject bed, fridge, toilet, bath, washBasin, tv;
 	[SerializeField]
 	private Sprite walkInteractionIcon;
+	private AudioSource audioSource;
 
 
 	private void Start()
@@ -219,6 +220,24 @@ public class PlayerInteraction : MonoBehaviour
 		for(int i = 0; i < usableObjectsDictionary.Count; i++)
 		{
 			AddInteraction(usableObjectsDictionary[keys[i]]);
+		}
+	}
+
+	private void PlayAnimationSound()
+	{
+		Debug.Log("StartBath: "+animator.GetCurrentAnimatorStateInfo(0).IsName("StartBath"));
+		Debug.Log("EndBath: "+animator.GetCurrentAnimatorStateInfo(0).IsName("EndBath"));
+
+		if(audioSource != null)
+		{
+			if(animator.GetCurrentAnimatorStateInfo(0).IsName("StartBath"))
+			{
+				audioSource.Play();
+			}
+			else
+			{
+				audioSource.Stop();
+			}
 		}
 	}
 }

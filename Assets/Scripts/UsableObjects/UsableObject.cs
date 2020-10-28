@@ -16,6 +16,9 @@ public class UsableObject : MonoBehaviour
 	private Transform startUsingObjectPosition;
 	[SerializeField]
 	private Sprite interactionButtonIcon;
+	[SerializeField]
+	private AudioClip[] otherAnimationSounds;
+	private AudioSource audioSource;
 	private Animator animator;
 	private Coroutine usingObjectCoroutine;
 
@@ -30,6 +33,7 @@ public class UsableObject : MonoBehaviour
 	private void Start()
 	{
 		animator = GetComponent<Animator>();
+		audioSource = GetComponent<AudioSource>();
 	}
 
 	public void StartUsingObject(GameObject player)
@@ -197,6 +201,25 @@ public class UsableObject : MonoBehaviour
 		if(animator != null)
 		{
 			animator.SetTrigger(startUsingObject ? "StartInteraction" : "EndInteraction");
+		}
+	}
+
+	private void PlayAnimationSound(int audioIndex = 0)
+	{
+		if(audioSource != null)
+		{
+			if(animator.GetCurrentAnimatorStateInfo(0).IsName("StartInteraction") || animator.GetCurrentAnimatorStateInfo(0).IsName("Interaction"))
+			{
+				if(otherAnimationSounds.Length-1 >= audioIndex)
+				{
+					audioSource.clip = otherAnimationSounds[audioIndex];
+				}
+				audioSource.Play();
+			}
+			else
+			{
+				audioSource.Stop();
+			}
 		}
 	}
 }

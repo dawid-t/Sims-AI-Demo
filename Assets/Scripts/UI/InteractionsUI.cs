@@ -32,7 +32,8 @@ public class InteractionsUI : MonoBehaviour
 			interactionButtonsList[currentNumberOfActiveButtons].GetComponent<Image>().sprite = buttonIcon;
 			interactionButtonsList[currentNumberOfActiveButtons].gameObject.SetActive(true);
 
-			if(currentNumberOfActiveButtons == 0 && player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsTag("Idle"))
+			Animator playerAnimator = player.GetComponent<Animator>();
+			if(currentNumberOfActiveButtons == 0 && (playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Idle") || playerAnimator.GetNextAnimatorStateInfo(0).IsTag("Idle")))
 			{
 				StartInteraction();
 				player.GetComponent<AutoPlayer>().StopAutoPlayer();

@@ -53,15 +53,7 @@ public class AutoPlayer : MonoBehaviour
 			}
 			else if(randomValue < hungerChance+entertainmentChance+hygieneChance)
 			{
-				int hygieneRandomValue = Random.Range(0, 2);
-				if(hygieneRandomValue == 0)
-				{
-					playerInteraction.AddInteraction(washBasin);
-				}
-				else
-				{
-					playerInteraction.AddInteraction(bath);
-				}
+				playerInteraction.AddInteraction((Random.Range(0, 2) == 0) ? washBasin : bath);
 			}
 			else if(randomValue < hungerChance+entertainmentChance+hygieneChance+bladderChance)
 			{

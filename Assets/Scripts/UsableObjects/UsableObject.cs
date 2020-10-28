@@ -5,19 +5,19 @@ using UnityEngine.AI;
 public class UsableObject : MonoBehaviour
 {
 	[SerializeField]
-	protected int usableTime, delayedUsableTime;
+	private int usableTime, delayedUsableTime;
 	[SerializeField] [Range(-5, 5)]
-	protected int hungerChanger, entertainmentChanger, hygieneChanger, bladderChanger, energyChanger;
+	private int hungerChanger, entertainmentChanger, hygieneChanger, bladderChanger, energyChanger;
 	[SerializeField]
-	protected string objectInteractionInfo, startPlayerAnimationTriggerName, endPlayerAnimationTriggerName;
+	private string objectInteractionInfo, startPlayerAnimationTriggerName, endPlayerAnimationTriggerName;
 	[SerializeField]
-	protected int startPlayerAnimationRotation;
+	private int startPlayerAnimationRotation;
 	[SerializeField]
-	protected Transform startUsingObjectPosition;
+	private Transform startUsingObjectPosition;
 	[SerializeField]
-	protected Sprite interactionButtonIcon;
-	protected Animator animator;
-	protected Coroutine usingObjectCoroutine;
+	private Sprite interactionButtonIcon;
+	private Animator animator;
+	private Coroutine usingObjectCoroutine;
 
 
 	public int UsableTime => usableTime;
@@ -36,16 +36,22 @@ public class UsableObject : MonoBehaviour
 	{
 		if(usingObjectCoroutine == null)
 		{
-			ResetPlayerAnimationTriggers(player);
+			ResetAnimationTriggers(player);
 			usingObjectCoroutine = StartCoroutine(UsingObject(player));
 		}
 	}
 
-	private void ResetPlayerAnimationTriggers(GameObject player)
+	private void ResetAnimationTriggers(GameObject player)
 	{
 		Animator playerAnimator = player.GetComponent<Animator>();
 		playerAnimator.ResetTrigger(startPlayerAnimationTriggerName);
 		playerAnimator.ResetTrigger(endPlayerAnimationTriggerName);
+
+		if(animator != null)
+		{
+			animator.ResetTrigger("StartInteraction");
+			animator.ResetTrigger("EndInteraction");
+		}
 	}
 
 	protected IEnumerator UsingObject(GameObject player)

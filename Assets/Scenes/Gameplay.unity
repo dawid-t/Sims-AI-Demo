@@ -484,6 +484,114 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0.504, z: -0.027}
   m_TimeToStationary: 0.5
+--- !u!1 &156280150
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 156280151}
+  - component: {fileID: 156280153}
+  - component: {fileID: 156280152}
+  - component: {fileID: 156280154}
+  - component: {fileID: 156280155}
+  m_Layer: 5
+  m_Name: BlackScreenPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &156280151
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156280150}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1951320324}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 200}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &156280152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156280150}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &156280153
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156280150}
+  m_CullTransparentMesh: 0
+--- !u!95 &156280154
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156280150}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e7e5fbe97de52914d81fa6b4dcdc618b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &156280155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156280150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecf307dbad0876944a9c60875447c328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &209623756
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,7 +712,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1983864810}
+      - m_Target: {fileID: 378912823}
         m_TargetAssemblyTypeName: InteractionsUI, Assembly-CSharp
         m_MethodName: OnClickCancelInteractionButton
         m_Mode: 2
@@ -640,7 +748,6 @@ GameObject:
   - component: {fileID: 276925869}
   - component: {fileID: 276925868}
   - component: {fileID: 276925867}
-  - component: {fileID: 276925870}
   m_Layer: 5
   m_Name: StatisticsCanvas
   m_TagString: Untagged
@@ -728,28 +835,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &276925870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 276925865}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e752a168c928b145aa527aadafc487a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hungerPercentsText: {fileID: 1688183317}
-  entertainmentPercentsText: {fileID: 1879654349}
-  hygienePercentsText: {fileID: 1285499909}
-  bladderPercentsText: {fileID: 1023887914}
-  energyPercentsText: {fileID: 1751332533}
-  hungerBarImage: {fileID: 1222072842}
-  entertainmentBarImage: {fileID: 1770794714}
-  hygieneBarImage: {fileID: 1695336344}
-  bladderBarImage: {fileID: 1499138532}
-  energyBarImage: {fileID: 1959033508}
 --- !u!1 &280941138
 GameObject:
   m_ObjectHideFlags: 0
@@ -1404,6 +1489,7 @@ GameObject:
   - component: {fileID: 378912821}
   - component: {fileID: 378912820}
   - component: {fileID: 378912822}
+  - component: {fileID: 378912823}
   m_Layer: 5
   m_Name: InteractionsPanel
   m_TagString: Untagged
@@ -1504,6 +1590,31 @@ MonoBehaviour:
   m_Spacing: {x: 10, y: 10}
   m_Constraint: 1
   m_ConstraintCount: 3
+--- !u!114 &378912823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378912818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76def40e19e38994484360df33df77a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionButtonsList:
+  - {fileID: 209623760}
+  - {fileID: 537065182}
+  - {fileID: 477126693}
+  - {fileID: 1266187795}
+  - {fileID: 1554563972}
+  - {fileID: 1081388372}
+  - {fileID: 1291476913}
+  - {fileID: 521399856}
+  - {fileID: 457272349}
+  - {fileID: 1309843564}
+  - {fileID: 1254289364}
+  - {fileID: 845700810}
 --- !u!1 &389547981
 GameObject:
   m_ObjectHideFlags: 0
@@ -1808,7 +1919,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1983864810}
+      - m_Target: {fileID: 378912823}
         m_TargetAssemblyTypeName: InteractionsUI, Assembly-CSharp
         m_MethodName: OnClickCancelInteractionButton
         m_Mode: 2
@@ -2034,7 +2145,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1983864810}
+      - m_Target: {fileID: 378912823}
         m_TargetAssemblyTypeName: InteractionsUI, Assembly-CSharp
         m_MethodName: OnClickCancelInteractionButton
         m_Mode: 2
@@ -2442,7 +2553,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1983864810}
+      - m_Target: {fileID: 378912823}
         m_TargetAssemblyTypeName: InteractionsUI, Assembly-CSharp
         m_MethodName: OnClickCancelInteractionButton
         m_Mode: 2
@@ -2620,7 +2731,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1983864810}
+      - m_Target: {fileID: 378912823}
         m_TargetAssemblyTypeName: InteractionsUI, Assembly-CSharp
         m_MethodName: OnClickCancelInteractionButton
         m_Mode: 2
@@ -2682,36 +2793,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 972200fa00835f04c9adad66163fcd54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &538430057
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 538430058}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &538430058
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 538430057}
-  m_LocalRotation: {x: 0.00000048731704, y: -0.0006980808, z: -0.0006980808, w: 0.9999995}
-  m_LocalPosition: {x: 8.02387, y: 2.1732, z: -8.23607}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: -0.08, z: -0.08}
 --- !u!1 &539157441
 GameObject:
   m_ObjectHideFlags: 0
@@ -3514,6 +3595,7 @@ GameObject:
   - component: {fileID: 659219286}
   - component: {fileID: 659219288}
   - component: {fileID: 659219287}
+  - component: {fileID: 659219289}
   m_Layer: 5
   m_Name: StatisticsPanel
   m_TagString: Untagged
@@ -3584,6 +3666,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 659219285}
   m_CullTransparentMesh: 0
+--- !u!114 &659219289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 659219285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e752a168c928b145aa527aadafc487a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hungerPercentsText: {fileID: 1688183317}
+  entertainmentPercentsText: {fileID: 1879654349}
+  hygienePercentsText: {fileID: 1285499909}
+  bladderPercentsText: {fileID: 1023887914}
+  energyPercentsText: {fileID: 1751332533}
+  hungerBarImage: {fileID: 1222072842}
+  entertainmentBarImage: {fileID: 1770794714}
+  hygieneBarImage: {fileID: 1695336344}
+  bladderBarImage: {fileID: 1499138532}
+  energyBarImage: {fileID: 1959033508}
 --- !u!1 &679359373 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1546580417174750, guid: f526a5e39f40945d7abb24a570e985de, type: 3}
@@ -4216,6 +4320,7 @@ RectTransform:
   m_Children:
   - {fileID: 1983864806}
   - {fileID: 276925866}
+  - {fileID: 1951320324}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4410,7 +4515,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1983864810}
+      - m_Target: {fileID: 378912823}
         m_TargetAssemblyTypeName: InteractionsUI, Assembly-CSharp
         m_MethodName: OnClickCancelInteractionButton
         m_Mode: 2
@@ -5701,7 +5806,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1983864810}
+      - m_Target: {fileID: 378912823}
         m_TargetAssemblyTypeName: InteractionsUI, Assembly-CSharp
         m_MethodName: OnClickCancelInteractionButton
         m_Mode: 2
@@ -6546,7 +6651,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1983864810}
+      - m_Target: {fileID: 378912823}
         m_TargetAssemblyTypeName: InteractionsUI, Assembly-CSharp
         m_MethodName: OnClickCancelInteractionButton
         m_Mode: 2
@@ -6690,7 +6795,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1983864810}
+      - m_Target: {fileID: 378912823}
         m_TargetAssemblyTypeName: InteractionsUI, Assembly-CSharp
         m_MethodName: OnClickCancelInteractionButton
         m_Mode: 2
@@ -6968,7 +7073,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1983864810}
+      - m_Target: {fileID: 378912823}
         m_TargetAssemblyTypeName: InteractionsUI, Assembly-CSharp
         m_MethodName: OnClickCancelInteractionButton
         m_Mode: 2
@@ -7153,7 +7258,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1983864810}
+      - m_Target: {fileID: 378912823}
         m_TargetAssemblyTypeName: InteractionsUI, Assembly-CSharp
         m_MethodName: OnClickCancelInteractionButton
         m_Mode: 2
@@ -8776,7 +8881,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1983864810}
+      - m_Target: {fileID: 378912823}
         m_TargetAssemblyTypeName: InteractionsUI, Assembly-CSharp
         m_MethodName: OnClickCancelInteractionButton
         m_Mode: 2
@@ -10098,7 +10203,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 276925870}
+      - m_Target: {fileID: 659219289}
         m_TargetAssemblyTypeName: StatisticsUI, Assembly-CSharp
         m_MethodName: OnClickPrioritizeButton
         m_Mode: 1
@@ -10662,6 +10767,105 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &1951320323
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1951320324}
+  - component: {fileID: 1951320327}
+  - component: {fileID: 1951320326}
+  - component: {fileID: 1951320325}
+  m_Layer: 5
+  m_Name: BlackScreenCanvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1951320324
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951320323}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 156280151}
+  m_Father: {fileID: 769955753}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1951320325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951320323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &1951320326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951320323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+--- !u!223 &1951320327
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951320323}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &1959033506
 GameObject:
   m_ObjectHideFlags: 0
@@ -10750,7 +10954,6 @@ GameObject:
   - component: {fileID: 1983864809}
   - component: {fileID: 1983864808}
   - component: {fileID: 1983864807}
-  - component: {fileID: 1983864810}
   m_Layer: 5
   m_Name: InteractionsCanvas
   m_TagString: Untagged
@@ -10838,31 +11041,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &1983864810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1983864805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76def40e19e38994484360df33df77a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionButtonsList:
-  - {fileID: 209623760}
-  - {fileID: 537065182}
-  - {fileID: 477126693}
-  - {fileID: 1266187795}
-  - {fileID: 1554563972}
-  - {fileID: 1081388372}
-  - {fileID: 1291476913}
-  - {fileID: 521399856}
-  - {fileID: 457272349}
-  - {fileID: 1309843564}
-  - {fileID: 1254289364}
-  - {fileID: 845700810}
 --- !u!1001 &1984264217
 PrefabInstance:
   m_ObjectHideFlags: 0

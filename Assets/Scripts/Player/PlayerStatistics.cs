@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class PlayerStatistics : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class PlayerStatistics : MonoBehaviour
 	[SerializeField] [Tooltip("Set time in seconds.")]
 	private int statisticsDecreaseTime = 30;
 	private int hunger, entertainment, hygiene, bladder, energy;
+	private Coroutine decreaseStatisticsOverTimeCoroutine;
 
 
 	public int MaxStatisticValue => maxStatisticValue;
@@ -25,7 +28,7 @@ public class PlayerStatistics : MonoBehaviour
 	private void Start()
 	{
 		InitStatistics();
-		StartCoroutine(DecreaseStatisticsOverTime());
+		decreaseStatisticsOverTimeCoroutine = StartCoroutine(DecreaseStatisticsOverTime());
 	}
 
 	private void OnValidate()
@@ -141,6 +144,7 @@ public class PlayerStatistics : MonoBehaviour
 				}
 				break;
 		}
+		Dead();
 	}
 
 	private IEnumerator DecreaseStatisticsOverTime()
@@ -175,13 +179,49 @@ public class PlayerStatistics : MonoBehaviour
 				energy--;
 				statisticsUI.ChangeEnergyUI(energy, maxStatisticValue);
 			}
-
-			if(hunger == 0 && entertainment == 0 && hygiene == 0 && bladder == 0 && energy == 0)
-			{
-				// TODO: Play death anim and restart the scene.
-				Debug.Log("DEAD!!!");
-				break;
-			}
+			Dead();
 		}
+	}
+
+	private void Dead()
+	{
+		if(hunger == 0 && entertainment == 0 && hygiene == 0 && bladder == 0 && energy == 0)
+		{
+			StartCoroutine(DelayedDead());
+		}
+	}
+
+	private IEnumerator DelayedDead()
+	{
+		if(decreaseStatisticsOverTimeCoroutine != null)
+		{
+			StopCoroutine(decreaseStatisticsOverTimeCoroutine);
+			decreaseStatisticsOverTimeCoroutine = null;
+		}
+
+		Animator playerAnimator = GetComponent<Animator>();
+		InteractionsUI.Instance.CancelWaitingInteractions(playerAnimator, true);
+		while(!playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Idle") && !playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Walk")) // If player is using the object then wait.
+		{
+			yield return null;
+		}
+
+		GetComponent<PlayerInteraction>().enabled = false;
+		InteractionsUI.Instance.CancelWaitingInteractions(playerAnimator);
+
+		GetComponent<NavMeshAgent>().enabled = false;
+		playerAnimator.applyRootMotion = true;
+
+		playerAnimator.ResetTrigger("Idle");
+		playerAnimator.ResetTrigger("Walk");
+		yield return null;
+		playerAnimator.SetTrigger("Dead");
+
+		yield return new WaitForSeconds(5);
+
+		ChangeSceneEffect.Instance.EndSceneEffect();
+		yield return new WaitForSeconds(1.5f);
+
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 }

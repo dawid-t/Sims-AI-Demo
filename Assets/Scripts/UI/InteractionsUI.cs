@@ -88,14 +88,17 @@ public class InteractionsUI : MonoBehaviour
 		DisableButton(clickedButton, interactionButtonAction);
 	}
 
-	public void CancelWaitingInteractions(Animator playerAnimator)
+	public void CancelWaitingInteractions(Animator playerAnimator, bool interruptFirstInteraction = false)
 	{
 		while(currentNumberOfActiveButtons > 0)
 		{
-			bool playerIsUsingObject = (!playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Idle") && !playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Walk"));
-			if(currentNumberOfActiveButtons == 0 || currentNumberOfActiveButtons == 1 && playerIsUsingObject) // Don't cancel first interaction if is in use.
+			if(!interruptFirstInteraction)
 			{
-				return;
+				bool playerIsUsingObject = (!playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Idle") && !playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Walk"));
+				if(currentNumberOfActiveButtons == 0 || currentNumberOfActiveButtons == 1 && playerIsUsingObject) // Don't cancel first interaction if is in use.
+				{
+					return;
+				}
 			}
 
 			Button button = interactionButtonsList[currentNumberOfActiveButtons-1].GetComponent<Button>();

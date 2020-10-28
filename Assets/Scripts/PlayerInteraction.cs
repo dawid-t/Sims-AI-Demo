@@ -11,7 +11,7 @@ public class PlayerInteraction : MonoBehaviour
 	private NavMeshAgent navMeshAgent;
 	private Coroutine walkToClickedPointCoroutine, stopWalkAnimationCoroutine;
 	[SerializeField]
-	protected Sprite walkInteractionIcon;
+	private Sprite walkInteractionIcon;
 
 
 	private void Start()
@@ -144,12 +144,15 @@ public class PlayerInteraction : MonoBehaviour
 
 	private void StopInteraction(UsableObject usableObject, int interactionButtonIndex)
 	{
-		usableObject?.StopUsingObject(gameObject);
-
-		// Stop the walking player:
-		if(navMeshAgent.enabled && interactionButtonIndex == 0)
+		if(interactionButtonIndex == 0)
 		{
-			navMeshAgent.destination = transform.position;
+			usableObject?.StopUsingObject(gameObject);
+
+			// Stop the walking player:
+			if(navMeshAgent.enabled)
+			{
+				navMeshAgent.destination = transform.position;
+			}
 		}
 	}
 }

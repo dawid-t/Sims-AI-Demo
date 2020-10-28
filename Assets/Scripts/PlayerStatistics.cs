@@ -11,7 +11,7 @@ public class PlayerStatistics : MonoBehaviour
 	private int maxStatisticValue = 10, startStatisticValue = 5;
 	[SerializeField] [Tooltip("Set time in seconds.")]
 	private int statisticsDecreaseTime = 30;
-	public int hunger, entertainment, hygiene, bladder, energy;
+	private int hunger, entertainment, hygiene, bladder, energy;
 
 
 	public int MaxStatisticValue => maxStatisticValue;
@@ -67,30 +67,35 @@ public class PlayerStatistics : MonoBehaviour
 				if(hunger < maxStatisticValue)
 				{
 					hunger++;
+					StatisticsUI.Instance.ChangeHungerUI(hunger, maxStatisticValue);
 				}
 				break;
 			case Statistic.Entertainment:
 				if(entertainment < maxStatisticValue)
 				{
 					entertainment++;
+					StatisticsUI.Instance.ChangeEntertainmentUI(entertainment, maxStatisticValue);
 				}
 				break;
 			case Statistic.Hygiene:
 				if(hygiene < maxStatisticValue)
 				{
 					hygiene++;
+					StatisticsUI.Instance.ChangeHygieneUI(hygiene, maxStatisticValue);
 				}
 				break;
 			case Statistic.Bladder:
 				if(bladder < maxStatisticValue)
 				{
 					bladder++;
+					StatisticsUI.Instance.ChangeBladderUI(bladder, maxStatisticValue);
 				}
 				break;
 			case Statistic.Energy:
 				if(energy < maxStatisticValue)
 				{
 					energy++;
+					StatisticsUI.Instance.ChangeEnergyUI(energy, maxStatisticValue);
 				}
 				break;
 		}
@@ -104,30 +109,35 @@ public class PlayerStatistics : MonoBehaviour
 				if(hunger > 0)
 				{
 					hunger--;
+					StatisticsUI.Instance.ChangeHungerUI(hunger, maxStatisticValue);
 				}
 				break;
 			case Statistic.Entertainment:
 				if(entertainment > 0)
 				{
 					entertainment--;
+					StatisticsUI.Instance.ChangeEntertainmentUI(entertainment, maxStatisticValue);
 				}
 				break;
 			case Statistic.Hygiene:
 				if(hygiene > 0)
 				{
 					hygiene--;
+					StatisticsUI.Instance.ChangeHygieneUI(hygiene, maxStatisticValue);
 				}
 				break;
 			case Statistic.Bladder:
 				if(bladder > 0)
 				{
 					bladder--;
+					StatisticsUI.Instance.ChangeBladderUI(bladder, maxStatisticValue);
 				}
 				break;
 			case Statistic.Energy:
 				if(energy > 0)
 				{
 					energy--;
+					StatisticsUI.Instance.ChangeEnergyUI(energy, maxStatisticValue);
 				}
 				break;
 		}
@@ -135,6 +145,7 @@ public class PlayerStatistics : MonoBehaviour
 
 	private IEnumerator DecreaseStatisticsOverTime()
 	{
+		StatisticsUI statisticsUI = StatisticsUI.Instance;
 		while(true)
 		{
 			yield return new WaitForSeconds(statisticsDecreaseTime);
@@ -142,22 +153,27 @@ public class PlayerStatistics : MonoBehaviour
 			if(hunger > 0)
 			{
 				hunger--;
+				statisticsUI.ChangeHungerUI(hunger, maxStatisticValue);
 			}
 			if(entertainment > 0)
 			{
 				entertainment--;
+				statisticsUI.ChangeEntertainmentUI(entertainment, maxStatisticValue);
 			}
 			if(hygiene > 0)
 			{
 				hygiene--;
+				statisticsUI.ChangeHygieneUI(hygiene, maxStatisticValue);
 			}
 			if(bladder > 0)
 			{
 				bladder--;
+				statisticsUI.ChangeBladderUI(bladder, maxStatisticValue);
 			}
 			if(energy > 0)
 			{
 				energy--;
+				statisticsUI.ChangeEnergyUI(energy, maxStatisticValue);
 			}
 
 			if(hunger == 0 && entertainment == 0 && hygiene == 0 && bladder == 0 && energy == 0)

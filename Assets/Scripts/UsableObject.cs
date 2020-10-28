@@ -64,7 +64,6 @@ public class UsableObject : MonoBehaviour
 		// Change the player statistics over time:
 		yield return new WaitForSeconds(delayedUsableTime);
 
-		StatisticsUI statisticsUI = StatisticsUI.Instance;
 		PlayerStatistics playerStatistics = player.GetComponent<PlayerStatistics>();
 		int hungerChangeTime = (hungerChanger != 0) ? usableTime / hungerChanger : 0;
 		int entertainmentChangeTime = (entertainmentChanger != 0) ? usableTime / entertainmentChanger : 0;
@@ -78,18 +77,16 @@ public class UsableObject : MonoBehaviour
 			yield return new WaitForSeconds(1);
 			currentUsableTime++;
 
-			#region Change the player statistics and their UI:
+			#region Change the player statistics:
 			if(hungerChangeTime != 0 && currentUsableTime % hungerChangeTime == 0)
 			{
 				if(hungerChanger > 0)
 				{
 					playerStatistics.IncreaseStatistic(PlayerStatistics.Statistic.Hunger);
-					statisticsUI.ChangeHungerUI(playerStatistics.Hunger, playerStatistics.MaxStatisticValue);
 				}
 				else if(hungerChanger < 0)
 				{
 					playerStatistics.DecreaseStatistic(PlayerStatistics.Statistic.Hunger);
-					statisticsUI.ChangeHungerUI(playerStatistics.Hunger, playerStatistics.MaxStatisticValue);
 				}
 			}
 
@@ -98,12 +95,10 @@ public class UsableObject : MonoBehaviour
 				if(entertainmentChanger > 0)
 				{
 					playerStatistics.IncreaseStatistic(PlayerStatistics.Statistic.Entertainment);
-					statisticsUI.ChangeEntertainmentUI(playerStatistics.Entertainment, playerStatistics.MaxStatisticValue);
 				}
 				else if(entertainmentChanger < 0)
 				{
 					playerStatistics.DecreaseStatistic(PlayerStatistics.Statistic.Entertainment);
-					statisticsUI.ChangeEntertainmentUI(playerStatistics.Entertainment, playerStatistics.MaxStatisticValue);
 				}
 			}
 
@@ -112,12 +107,10 @@ public class UsableObject : MonoBehaviour
 				if(hygieneChanger > 0)
 				{
 					playerStatistics.IncreaseStatistic(PlayerStatistics.Statistic.Hygiene);
-					statisticsUI.ChangeHygieneUI(playerStatistics.Hygiene, playerStatistics.MaxStatisticValue);
 				}
 				else if(hygieneChanger < 0)
 				{
 					playerStatistics.DecreaseStatistic(PlayerStatistics.Statistic.Hygiene);
-					statisticsUI.ChangeHygieneUI(playerStatistics.Hygiene, playerStatistics.MaxStatisticValue);
 				}
 			}
 
@@ -126,12 +119,10 @@ public class UsableObject : MonoBehaviour
 				if(bladderChanger > 0)
 				{
 					playerStatistics.IncreaseStatistic(PlayerStatistics.Statistic.Bladder);
-					statisticsUI.ChangeBladderUI(playerStatistics.Bladder, playerStatistics.MaxStatisticValue);
 				}
 				else if(bladderChanger < 0)
 				{
 					playerStatistics.DecreaseStatistic(PlayerStatistics.Statistic.Bladder);
-					statisticsUI.ChangeBladderUI(playerStatistics.Bladder, playerStatistics.MaxStatisticValue);
 				}
 			}
 
@@ -140,15 +131,13 @@ public class UsableObject : MonoBehaviour
 				if(energyChanger > 0)
 				{
 					playerStatistics.IncreaseStatistic(PlayerStatistics.Statistic.Energy);
-					statisticsUI.ChangeEnergyUI(playerStatistics.Energy, playerStatistics.MaxStatisticValue);
 				}
 				else if(energyChanger < 0)
 				{
 					playerStatistics.DecreaseStatistic(PlayerStatistics.Statistic.Energy);
-					statisticsUI.ChangeEnergyUI(playerStatistics.Energy, playerStatistics.MaxStatisticValue);
 				}
 			}
-			#endregion Change the player statistics and their UI.
+			#endregion Change the player statistics.
 		}
 
 		// End using the object:

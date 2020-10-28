@@ -12128,6 +12128,7 @@ GameObject:
   - component: {fileID: 1292979321}
   - component: {fileID: 1292979318}
   - component: {fileID: 1612056694538344646}
+  - component: {fileID: 1612056694538344648}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -12168,6 +12169,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1612056694538344648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612056694538344645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21a0ffe24713bd747ae5570c9aa1bc86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoPlayTime: 5
+  bed: {fileID: 14854270}
+  fridge: {fileID: 1876298610}
+  toilet: {fileID: 1403196065}
+  bath: {fileID: 1768743581}
+  washBasin: {fileID: 306597670}
+  tv: {fileID: 679359374}
 --- !u!1 &1612056694538344649
 GameObject:
   m_ObjectHideFlags: 0

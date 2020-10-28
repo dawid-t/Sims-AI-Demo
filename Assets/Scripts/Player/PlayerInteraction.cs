@@ -38,14 +38,13 @@ public class PlayerInteraction : MonoBehaviour
 
 		if(Physics.Raycast(ray, out hit))
 		{
-			InteractionsUI interactionsUI = InteractionsUI.Instance;
 			GameObject hoveredGameObject = hit.transform.gameObject;
 
 			if(hoveredGameObject.CompareTag("WalkableGround"))
 			{
 				if(Input.GetMouseButtonUp(0))
 				{
-					interactionsUI.AddInteraction(() =>
+					InteractionsUI.Instance.AddInteraction(() =>
 					{
 						if(walkToClickedPointCoroutine != null)
 						{
@@ -61,30 +60,35 @@ public class PlayerInteraction : MonoBehaviour
 					walkInteractionIcon, gameObject);
 				}
 			}
-			else if(hoveredGameObject.CompareTag("UsableObject"))// || hoveredGameObject.CompareTag("Player"))
+			else if(hoveredGameObject.CompareTag("UsableObject"))
 			{
 				UsableObject lastUsableObject = hoveredGameObject.GetComponent<UsableObject>();
 				ShowInteractionInfo(lastUsableObject);
 				if(Input.GetMouseButtonUp(0))
 				{
-					interactionsUI.AddInteraction(() =>
-					{
-						if(walkToClickedPointCoroutine != null)
-						{
-							StopCoroutine(walkToClickedPointCoroutine);
-							StopWalkAnimationCoroutine();
-						}
-						walkToClickedPointCoroutine = StartCoroutine(WalkToClickedPoint(lastUsableObject.StartUsingObjectPosition.position, false));
-						StartInteraction(lastUsableObject);
-					},
-					(interactionButtonIndex) =>
-					{
-						StopInteraction(lastUsableObject, interactionButtonIndex);
-					},
-					lastUsableObject.InteractionButtonIcon, gameObject);
+					AddInteraction(lastUsableObject);
 				}
 			}
 		}
+	}
+
+	public void AddInteraction(UsableObject usableObject)
+	{
+		InteractionsUI.Instance.AddInteraction(() =>
+		{
+			if(walkToClickedPointCoroutine != null)
+			{
+				StopCoroutine(walkToClickedPointCoroutine);
+				StopWalkAnimationCoroutine();
+			}
+			walkToClickedPointCoroutine = StartCoroutine(WalkToClickedPoint(usableObject.StartUsingObjectPosition.position, false));
+			StartInteraction(usableObject);
+		},
+		(interactionButtonIndex) =>
+		{
+			StopInteraction(usableObject, interactionButtonIndex);
+		},
+		usableObject.InteractionButtonIcon, gameObject);
 	}
 
 	private IEnumerator WalkToClickedPoint(Vector3 clickedPoint, bool isFreeWalk)

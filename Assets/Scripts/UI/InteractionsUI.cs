@@ -35,6 +35,7 @@ public class InteractionsUI : MonoBehaviour
 			if(currentNumberOfActiveButtons == 0 && player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsTag("Idle"))
 			{
 				StartInteraction();
+				GameObject.FindWithTag("Player").GetComponent<AutoPlayer>().StopAutoPlayer();
 			}
 
 			currentNumberOfActiveButtons++;
@@ -60,6 +61,7 @@ public class InteractionsUI : MonoBehaviour
 				DisableButton();
 				if(!interactionButtonsList[0].gameObject.activeInHierarchy)
 				{
+					GameObject.FindWithTag("Player").GetComponent<AutoPlayer>().StartAutoPlayer();
 					return;
 				}
 
@@ -68,6 +70,10 @@ public class InteractionsUI : MonoBehaviour
 
 			interactionButtonAction.action.Invoke();
 			interactionButtonAction.WasUsed = true;
+		}
+		else
+		{
+			GameObject.FindWithTag("Player").GetComponent<AutoPlayer>().StartAutoPlayer();
 		}
 	}
 

@@ -35,7 +35,7 @@ public class InteractionsUI : MonoBehaviour
 			if(currentNumberOfActiveButtons == 0 && player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsTag("Idle"))
 			{
 				StartInteraction();
-				GameObject.FindWithTag("Player").GetComponent<AutoPlayer>().StopAutoPlayer();
+				player.GetComponent<AutoPlayer>().StopAutoPlayer();
 			}
 
 			currentNumberOfActiveButtons++;
@@ -77,7 +77,7 @@ public class InteractionsUI : MonoBehaviour
 		}
 	}
 
-	public void CancelInteraction(GameObject go)
+	public void OnClickCancelInteractionButton(GameObject go)
 	{
 		Button clickedButton = go.GetComponent<Button>();
 		int buttonIndex = interactionButtonsList.IndexOf(clickedButton);
@@ -86,6 +86,26 @@ public class InteractionsUI : MonoBehaviour
 		interactionButtonAction.cancelAction.Invoke(buttonIndex);
 
 		DisableButton(clickedButton, interactionButtonAction);
+	}
+
+	public void CancelWaitingInteractions(Animator playerAnimator)
+	{
+		while(currentNumberOfActiveButtons > 0)
+		{
+			bool playerIsUsingObject = (!playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Idle") && !playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Walk"));
+			if(currentNumberOfActiveButtons == 0 || currentNumberOfActiveButtons == 1 && playerIsUsingObject) // Don't cancel first interaction if is in use.
+			{
+				return;
+			}
+
+			Button button = interactionButtonsList[currentNumberOfActiveButtons-1].GetComponent<Button>();
+			int buttonIndex = interactionButtonsList.IndexOf(button);
+
+			InteractionButtonAction interactionButtonAction = button.GetComponent<InteractionButtonAction>();
+			interactionButtonAction.cancelAction.Invoke(buttonIndex);
+
+			DisableButton(button, interactionButtonAction);
+		}
 	}
 
 	private void DisableButton(Button button = null, InteractionButtonAction interactionButtonAction = null)

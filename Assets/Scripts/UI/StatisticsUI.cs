@@ -76,4 +76,9 @@ public class StatisticsUI : MonoBehaviour
 		// Bar length:
 		statisticbarImage.fillAmount = normalizedPercents;
 	}
+
+	public void OnClickPrioritizeButton()
+	{
+		GameObject.FindWithTag("Player").GetComponent<PlayerInteraction>().PrioritizeInteractions();
+	}
 }

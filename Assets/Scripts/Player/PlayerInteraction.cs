@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
@@ -10,6 +11,8 @@ public class PlayerInteraction : MonoBehaviour
 	private Animator animator;
 	private NavMeshAgent navMeshAgent;
 	private Coroutine walkToClickedPointCoroutine, stopWalkAnimationCoroutine;
+	[SerializeField]
+	private UsableObject bed, fridge, toilet, bath, washBasin, tv;
 	[SerializeField]
 	private Sprite walkInteractionIcon;
 
@@ -157,6 +160,65 @@ public class PlayerInteraction : MonoBehaviour
 			{
 				navMeshAgent.destination = transform.position;
 			}
+		}
+	}
+
+	public void PrioritizeInteractions()
+	{
+		InteractionsUI.Instance.CancelWaitingInteractions(animator);
+
+		PlayerStatistics playerStatistics = GetComponent<PlayerStatistics>();
+		Dictionary<float, UsableObject> usableObjectsDictionary = new Dictionary<float, UsableObject>();
+
+		#region Sort by the player statistics and add usable objects to the dictionary:
+		// Hunger:
+		float key = playerStatistics.Hunger;
+		float[] keys = new float[5];
+		
+		keys[0] = key;
+		usableObjectsDictionary.Add(keys[0], fridge);
+
+		// Entertainment:
+		key = playerStatistics.Entertainment;
+		while(key == keys[0])
+		{
+			key += 0.1f;
+		}
+		keys[1] = key;
+		usableObjectsDictionary.Add(keys[1], tv);
+
+		// Hygiene:
+		key = playerStatistics.Hygiene;
+		while(key == keys[0] || key == keys[1])
+		{
+			key += 0.1f;
+		}
+		keys[2] = key;
+		usableObjectsDictionary.Add(keys[2], (Random.Range(0, 2) == 0) ? washBasin : bath);
+
+		// Bladder:
+		key = playerStatistics.Bladder;
+		while(key == keys[0] || key == keys[1] || key == keys[2])
+		{
+			key += 0.1f;
+		}
+		keys[3] = key;
+		usableObjectsDictionary.Add(keys[3], toilet);
+
+		// Energy:
+		key = playerStatistics.Energy;
+		while(key == keys[0] || key == keys[1] || key == keys[2] || key == keys[3])
+		{
+			key += 0.1f;
+		}
+		keys[4] = key;
+		usableObjectsDictionary.Add(keys[4], bed);
+		#endregion Sort by the player statistics and add usable objects to the dictionary.
+
+		System.Array.Sort(keys);
+		for(int i = 0; i < usableObjectsDictionary.Count; i++)
+		{
+			AddInteraction(usableObjectsDictionary[keys[i]]);
 		}
 	}
 }

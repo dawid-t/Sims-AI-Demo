@@ -16,7 +16,6 @@ public class PlayerInteraction : MonoBehaviour
 	private UsableObject bed, fridge, toilet, bath, washBasin, tv;
 	[SerializeField]
 	private Sprite walkInteractionIcon;
-	private AudioSource audioSource;
 	private TextMeshPro lastUsableObjectInteractionInfo;
 
 

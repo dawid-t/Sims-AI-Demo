@@ -175,12 +175,12 @@ public class UsableObject : MonoBehaviour
 		Animator playerAnimator = player.GetComponent<Animator>();
 		playerAnimator.SetTrigger(startUsingObject ? startPlayerAnimationTriggerName : endPlayerAnimationTriggerName);
 		PlayUsableObjectAnimation(startUsingObject);
-
+		
 		if(!startUsingObject)
 		{
-			while(!playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Idle"))
+			while(!playerAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Idle") || playerAnimator.GetNextAnimatorStateInfo(0).length != 0)
 			{
-				yield return null; // Wait for the Idle animation.
+				yield return null; // Wait for the Idle animation without the next animation.
 			}
 		}
 

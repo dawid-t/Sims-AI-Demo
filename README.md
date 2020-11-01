@@ -10,7 +10,7 @@
 - Player can prioritize the interactions by clicking the button in the left bottom corner.
 - If every need is equal to 0% then the AI is dying and scene is restarting.
 - Most of the animations are created by using <a href="https://www.mixamo.com"><b>Mixamo</b></a> and <a href="https://assetstore.unity.com/packages/tools/animation/umotion-pro-animation-editor-95991"><b>UMotion Pro</b></a> tool.
-- All models are from <a href="https://assetstore.unity.com/packages/3d/props/low-poly-ultimate-pack-54733"><b>Low Poly Ultimate Pack</b></a> (some of them was modified in Blender).
+- All models are from <a href="https://assetstore.unity.com/packages/3d/props/low-poly-ultimate-pack-54733"><b>Low Poly Ultimate Pack</b></a> (some of them was modified in **Blender**).
 - Created in **Unity** 2020.1.10f1 in **Universal Render Pipeline (URP)**.
 
 
